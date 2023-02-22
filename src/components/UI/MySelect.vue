@@ -1,7 +1,7 @@
 <template>
-    <select v-bind="modelValue" @change="changeOptions">
+    <select v-model="modelValue" @change="changeOptions">
         <option disabled value="">Выбирите из списка</option>
-        <option v-for="option in options" :key="option.value" value="" :option="option.value">
+        <option v-for="option in options" :key="option.value" :value="option.value">
             {{ option.name }}
         </option>
     </select>
@@ -19,9 +19,14 @@
                 default: () => []
             }
         },
+        data() {
+            return {
+                modelValue: this.modelValue
+            }
+        },
         methods: {
             changeOptions(event) {
-                this.$emit('update:modalValue', event.target.value);
+                this.$emit('update:modelValue', event.target.value);
             }
         }
     }
